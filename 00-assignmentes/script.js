@@ -224,6 +224,8 @@ const books = [
   },
 ];
 
+//
+
 //Rest operator and rest parameter
 
 /* const [mainKeyword, ...rest] = books[0].keywords;
