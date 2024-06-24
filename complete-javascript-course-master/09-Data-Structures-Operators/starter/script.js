@@ -54,26 +54,52 @@ const restaurant = {
   },
 };
 
+//Short Circuting
+console.log('------ OR --------');
+
+console.log(3 || 'Jonas'); // 3
+console.log('' || 'Jonas'); // Jonas '' is a falsy value
+console.log(true || 0); // true
+console.log(undefined || null); // null because undefined is a falsy value, and then he prints null besides null is also a falsy value
+
+console.log(undefined || 0 || '' || 'Hello' || 23 || null); //prints hello because is the firs truthy value
+/*
+restaurant.numGuests = 23; */
+const guests1 = restaurant.numGuests ? restaurant.numGuests : 10;
+console.log(guests1);
+
+const guests2 = restaurant.numGuests || 10;
+console.log(guests2);
+
+console.log('------ AND --------');
+
+console.log(0 && 'Jonas'); // return 0
+console.log(7 && 'Jonas'); // return Jonas because 7 is a truty value then passes trought 'Jonas' and return him
+
+console.log('Hello' && 23 && null && 'Jonas'); // return null
+
+restaurant.orderPizza && restaurant.orderPizza('mushrooms', 'spinach');
+
 //Rest Pattern
 
 //Spread, because on Right side of =
-const arr = [1, 2, ...[3, 4]];
+/* const arr = [1, 2, ...[3, 4]]; */
 //Rest on the left side of =
-const [a, b, ...others] = [1, 2, 3, 4, 5];
+/* const [a, b, ...others] = [1, 2, 3, 4, 5];
 console.log(a, b, others);
 
 const [first, , third, ...otherFood] = [
   ...restaurant.mainMenu,
   ...restaurant.starterMenu,
 ];
-console.log(first, third, otherFood);
+console.log(first, third, otherFood); */
 
 // Objects
-const { sat, ...weekdays } = restaurant.openingHours;
-console.log(weekdays);
+/* const { sat, ...weekdays } = restaurant.openingHours;
+console.log(weekdays); */
 
 //Functions REST PARAMETERS
-const add = function (...nums) {
+/* const add = function (...nums) {
   let sum = 0;
   for (let i = 0; i < nums.length; i++) {
     sum += nums[i];
@@ -89,7 +115,7 @@ const x = [23, 5, 7];
 
 add(...x);
 
-restaurant.orderPizza('mushrooms', 'tomato', 'tuna');
+restaurant.orderPizza('mushrooms', 'tomato', 'tuna'); */
 
 /* const ingredients = [
   prompt("Let's make pasta! Ingredient 1?"),
