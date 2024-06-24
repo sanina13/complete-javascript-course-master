@@ -54,8 +54,41 @@ const restaurant = {
   },
 };
 
+//Logical Assignment Operators
+
+const rest1 = {
+  name: 'Capri',
+  /* numGuests: 20, */
+  numGuests: 0,
+};
+
+const rest2 = {
+  name: 'La Piazza',
+  owner: 'Giovanni Rossi',
+};
+
+/* rest1.numGuests = rest1.numGuests || 10;
+rest2.numGuests = rest2.numGuests || 10; */
+
+//Nullish assignment operator
+rest1.numGuests ??= 10;
+rest2.numGuests ??= 10;
+
+//Logical and operator
+rest1.owner &&= 'anonymous';
+rest2.owner &&= 'anonymous';
+
+console.log(rest1);
+console.log(rest2);
+
+//Nullish Coalescing Operator
+
+/* restaurant.numGuests = 0;
+const guestCorrect = restaurant.numGuests ?? 10;
+console.log(guestCorrect);
+ */
 //Short Circuting
-console.log('------ OR --------');
+/* console.log('------ OR --------');
 
 console.log(3 || 'Jonas'); // 3
 console.log('' || 'Jonas'); // Jonas '' is a falsy value
@@ -65,7 +98,7 @@ console.log(undefined || null); // null because undefined is a falsy value, and 
 console.log(undefined || 0 || '' || 'Hello' || 23 || null); //prints hello because is the firs truthy value
 /*
 restaurant.numGuests = 23; */
-const guests1 = restaurant.numGuests ? restaurant.numGuests : 10;
+/* const guests1 = restaurant.numGuests ? restaurant.numGuests : 10;
 console.log(guests1);
 
 const guests2 = restaurant.numGuests || 10;
@@ -79,7 +112,7 @@ console.log(7 && 'Jonas'); // return Jonas because 7 is a truty value then passe
 console.log('Hello' && 23 && null && 'Jonas'); // return null
 
 restaurant.orderPizza && restaurant.orderPizza('mushrooms', 'spinach');
-
+ */
 //Rest Pattern
 
 //Spread, because on Right side of =

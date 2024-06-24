@@ -224,9 +224,28 @@ const books = [
   },
 ];
 
+//Logical assigment operator
+/* for (let i = 0; i < books.length; i++) {
+  books[i].edition ||= 1;
+} */
+
+for (let i = 0; i < books.length; i++) {
+  books[i].highlighted &&= !(books[i].thirdParty.goodreads.rating < 4.2);
+}
+console.log(books);
+
+//Nullish operator
+
+/* for (let i = 0; i < books.length; i++) {
+  books[i].onlineContent ??
+    console.log(
+      `"${books[i].title}" provides no data about its online content`
+    );
+} */
+
 //short circuiting
 
-const hasExamplesInJava = function (book) {
+/* const hasExamplesInJava = function (book) {
   return book.programmingLanguage === 'Java' || 'no data available';
 };
 console.log(hasExamplesInJava(books[1]));
@@ -239,7 +258,7 @@ for (let i = 0; i < books.length; i++) {
 for (let i = 0; i < books.length; i++) {
   books[i].onlineContent &&
     console.log(`"${books[i].title}" provides online content`);
-}
+} */
 //Rest operator and rest parameter
 
 /* const [mainKeyword, ...rest] = books[0].keywords;
