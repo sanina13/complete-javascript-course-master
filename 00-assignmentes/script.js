@@ -223,16 +223,113 @@ const books = [
     highlighted: true,
   },
 ];
+//Sets
+const allKeywords = [];
 
+for (const book of books) {
+  /* for (const keyword of book.keywords) {
+    allKeywords.push(keyword);
+  } */
+  allKeywords.push(...book.keywords);
+}
+console.log(allKeywords);
+
+const uniqueKeywords = new Set(allKeywords);
+
+uniqueKeywords.add('coding');
+uniqueKeywords.add('science');
+console.log(uniqueKeywords);
+uniqueKeywords.delete('business');
+console.log(uniqueKeywords);
+
+const uniqueKeywordsArr = [...uniqueKeywords];
+console.log(uniqueKeywordsArr);
+
+uniqueKeywords.clear();
+console.log(uniqueKeywords);
+
+//Looping Objects
+/* const entires = [];
+
+for (const keys of Object.keys(books[0].thirdParty.goodreads)) {
+  entires.push([keys]);
+}
+console.log(entires);
+
+for (const [index, value] of Object.values(
+  books[0].thirdParty.goodreads
+).entries()) {
+  entires[index].push(value);
+}
+console.log(entires);
+//11.3
+const entries2 = Object.entries(books[0].thirdParty.goodreads);
+console.log(entries2);
+ */
+//Optional Chaining
+/* const getFirstKeyword = function (books) {
+  return books.keywords?.[0] ? books.keywords[0] : 'Keyword not found';
+};
+console.log(getFirstKeyword(books[0])); */
+
+/* const bookData = [
+  ['title', 'Computer Networking: A Top-Down Approach'],
+  ['author', ['James F. Kurose', 'Keith W. Ross']],
+  ['publisher', 'Addison Wesley'],
+];
+
+// Do the rest
+const newBook = {
+  [bookData[0][0]]: bookData[0][1],
+  [bookData[1][0]]: bookData[1][1],
+  [bookData[2][0]]: bookData[2][1],
+};
+console.log(newBook);
+const pages = 880;
+const newBook2 = {
+  title: 'The C Programming Language',
+  author: ['Brian W. Kernighan', 'Dennis M. Ritchie'],
+  pages,
+};
+console.log(newBook2); */
+
+//Enhanced Object Literals
+
+//Looping Arrays
+/* let pageSum = 0;
+for (const pages of books) {
+  pageSum += pages.pages;
+}
+console.log(pageSum);
+ */
+/* const allAuthors = [];
+
+for (const book of books) {
+  if (!(typeof book.author === 'string')) {
+    for (const author of book.author) {
+      allAuthors.push(author);
+    }
+  } else {
+    allAuthors.push(book.author);
+  }
+}
+console.log(allAuthors);
+
+//8.3)
+
+for (const [id, author] of allAuthors.entries()) {
+  console.log(`${id + 1}. ${author}`);
+}
+ */
 //Logical assigment operator
 /* for (let i = 0; i < books.length; i++) {
   books[i].edition ||= 1;
 } */
 
-for (let i = 0; i < books.length; i++) {
+/* for (let i = 0; i < books.length; i++) {
   books[i].highlighted &&= !(books[i].thirdParty.goodreads.rating < 4.2);
 }
-console.log(books);
+console.log(books); */
 
 //Nullish operator
 

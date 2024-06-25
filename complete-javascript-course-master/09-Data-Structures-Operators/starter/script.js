@@ -54,6 +54,35 @@ const restaurant = {
 
 //Sets
 
+const ordersSet = new Set([
+  'Pasta',
+  'Pizza',
+  'Pizza',
+  'Risotto',
+  'Pasta',
+  'Pizza',
+]);
+
+console.log(new Set('Jonas'));
+
+console.log(ordersSet);
+console.log(ordersSet.size);
+console.log(ordersSet.has('Pizza'));
+ordersSet.add('Garlic Bread');
+ordersSet.add('Garlic Bread');
+ordersSet.delete('Risotto');
+
+console.log(ordersSet);
+
+for (const order of ordersSet) console.log(order);
+
+//Use case
+const staff = ['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter'];
+const staffUnique = [...new Set(staff)];
+console.log(staffUnique);
+const staffArr = [...staffUnique];
+console.log(staffArr);
+
 /* const game = {
   team1: 'Bayern Munich',
   team2: 'Borrussia Dortmund',
