@@ -223,16 +223,46 @@ const books = [
     highlighted: true,
   },
 ];
-//Sets
-const allKeywords = [];
 
-for (const book of books) {
+//Maps 2
+const firstBookMap = new Map(Object.entries(books[0]));
+console.log(firstBookMap);
+
+for (const [key, value] of firstBookMap) {
+  if (typeof value === 'number') console.log(key);
+}
+
+//Maps
+/* const bookMap = new Map();
+const Data = [
+  ['title', 'Clean Code'],
+  ['author', 'Robert C. Martin'],
+];
+bookMap.set(Data[0][0], Data[0][1]);
+bookMap.set(Data[1][0], Data[1][1]);
+console.log(bookMap);
+
+bookMap.set('pages', 464);
+console.log(bookMap);
+console.log(`"${bookMap.get('title')}" by ${bookMap.get('author')}`);
+console.log(bookMap.size);
+
+console.log(
+  bookMap.has('author')
+    ? 'The author of the book is known'
+    : 'The author is anonymous'
+); */
+
+//Sets
+/* const allKeywords = []; */
+
+/* for (const book of books) {
   /* for (const keyword of book.keywords) {
     allKeywords.push(keyword);
   } */
-  allKeywords.push(...book.keywords);
-}
-console.log(allKeywords);
+/*   allKeywords.push(...book.keywords); */
+/* } */
+/* console.log(allKeywords);
 
 const uniqueKeywords = new Set(allKeywords);
 
@@ -246,7 +276,7 @@ const uniqueKeywordsArr = [...uniqueKeywords];
 console.log(uniqueKeywordsArr);
 
 uniqueKeywords.clear();
-console.log(uniqueKeywords);
+console.log(uniqueKeywords); */
 
 //Looping Objects
 /* const entires = [];
