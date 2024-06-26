@@ -223,6 +223,49 @@ const books = [
     highlighted: true,
   },
 ];
+//Strings part 3
+
+const logBookCategories = function (str) {
+  const strClear = str.split(';');
+  for (const word of strClear) {
+    console.log(word);
+  }
+};
+
+const bookCategories =
+  'science;computing;computer science;algorithms;business;operating systems;networking;electronics';
+
+/* logBookCategories(bookCategories); */
+
+//17.2
+const getKeywordsAsString = function (books) {
+  let str = [];
+  for (let i = 0; i < books.length; i++) {
+    for (const keyword of books[i].keywords.values()) {
+      str.push(keyword);
+    }
+  }
+  const setStr = [...new Set(str)];
+
+  console.log(setStr.join(';'));
+};
+getKeywordsAsString(books);
+
+//17.3
+const logBookChapters = function (arr) {
+  for (const [title, pages] of arr) {
+    console.log(title.padEnd(20, '_') + ' ' + pages);
+  }
+};
+
+const bookChapters = [
+  ['The Basics', 14],
+  ['Sorting', 254],
+  ['Searching', 372],
+  ['Graphs', 526],
+  ['Strings', 706],
+];
+logBookChapters(bookChapters);
 
 //Strings part 2
 
@@ -244,7 +287,7 @@ const books = [
 normalizeAuthorName('  JuliE sussMan (Contributor)'); */
 
 // 16.2
-const newBookTitle = books[1].title.replace('Programs', 'Software');
+/* const newBookTitle = books[1].title.replace('Programs', 'Software');
 console.log(newBookTitle);
 // 16.3
 const logBookTheme = function (title) {
@@ -265,6 +308,7 @@ const logBookTheme = function (title) {
     );
   }
 };
+ */
 
 //String Part 1
 /* console.log(books[1].ISBN[6]);

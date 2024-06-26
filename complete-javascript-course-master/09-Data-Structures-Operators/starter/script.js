@@ -52,13 +52,62 @@ const restaurant = {
   },
 };
 
+//Strings Part 3
+
+//Split and Join
+console.log('a+very+nice+string'.split('+')); //Return a array
+console.log('Jonas Sanina'.split(' '));
+
+const [firstName, lastName] = 'Jonas Sanina'.split(' ');
+
+const newName = ['Mr.', firstName, lastName.toUpperCase()].join(' ');
+console.log(newName);
+
+const capitalizeName = function (name) {
+  const names = name.split(' ');
+  const namesUp = [];
+  for (const letter of names) {
+    //Capitalization in another way
+    namesUp.push(letter.replace(letter[0], letter[0].toUpperCase()));
+  }
+  console.log(namesUp.join(' '));
+};
+
+capitalizeName('jessica ann smith davis');
+capitalizeName('tiago rosado sanina');
+
+//Padding a String
+const message = 'Go to gate 23!';
+console.log(message.padStart(20, '+').padEnd(30, '+'));
+console.log('Jonas'.padStart(20, '+').padEnd(30, '+'));
+
+//Real case of use padding
+const maskCreditCard = function (number) {
+  const str = number + ''; //Another way to convert a Number to a String
+  const last = str.slice(-4);
+  return last.padStart(str.length, '*');
+};
+console.log(maskCreditCard(43435343232123));
+console.log(maskCreditCard(32323131412412));
+console.log(maskCreditCard('43384384384834343843'));
+
+// Repeat
+const message2 = 'Bad waether... All Departues Delayed... ';
+console.log(message2.repeat(23));
+
+const planesInLine = function (n) {
+  console.log(`There are ${n} planes in line ${'✈️'.repeat(n)}`);
+};
+
+planesInLine(10);
+
 //Strings Part 2
-const airline = 'TAP Air Portugal';
+/* const airline = 'TAP Air Portugal';
 console.log(airline.toLowerCase());
-console.log(airline.toUpperCase());
+console.log(airline.toUpperCase()); */
 
 // Fix capitalization in name
-const passenger = 'jOnAS';
+/* const passenger = 'jOnAS';
 const passengerLower = passenger.toLowerCase();
 const passengerCorrect =
   passengerLower[0].toUpperCase() + passengerLower.slice(1);
@@ -68,10 +117,10 @@ const fixedCapitalization = function (name) {
   name = name.toLowerCase();
   return name[0].toUpperCase() + name.slice(1);
 };
-console.log(fixedCapitalization('TiAGo'));
+console.log(fixedCapitalization('TiAGo')); */
 
 // Comparing email email
-const email = 'hello@jonas.io';
+/* const email = 'hello@jonas.io';
 const loginEmail = '   Hello@Jonas.Io \n';
 const lowerEmail = loginEmail.toLowerCase();
 const clearSpaceEmail = lowerEmail.trim(); //remove whitspaces
@@ -86,26 +135,26 @@ const checkEmail = function (email, loginEmail) {
   return loginEmail === email;
 };
 console.log(
-  checkEmail('tiago.sanina12@gmail.com', '   TiaGo.saNiNa12@gMail.COM')
-);
+  checkEmail('tiago.sanina12@gmail.com', '   TiaGo.saNiNa12@gMail.COM') */
+/* ); */
 /******************************** */
 //Replacing
-const priceGB = '288,97£';
+/* const priceGB = '288,97£';
 const priceUs = priceGB.replace('£', '$').replace(',', '.');
 console.log(priceUs);
 
 const annoucement = 'All passengers como to barding door 23. Boarding door 23';
-console.log(annoucement.replaceAll('door', 'gate'));
+console.log(annoucement.replaceAll('door', 'gate')); */
 
 //Booleans with Strings methods
-const plane = 'Airbus A320neo';
+/* const plane = 'Airbus A320neo';
 console.log(plane.includes('A320')); // Verify if the String includes A320
 console.log(plane.startsWith('Air')); // Verify if the String starts with ex: Air
 
-if (plane.startsWith('Airbus') && plane.endsWith('neo')) console.log('New!!');
+if (plane.startsWith('Airbus') && plane.endsWith('neo')) console.log('New!!'); */
 
 //Practice exercise
-const checkBaggage = function (items) {
+/* const checkBaggage = function (items) {
   const baggage = items.toLowerCase();
   if (baggage.includes('knife') || baggage.includes('gun')) {
     console.log('Not Allowed on board');
@@ -116,7 +165,7 @@ const checkBaggage = function (items) {
 
 checkBaggage('I have a laptop, some Food and a pocket Knife');
 checkBaggage('Socks and camera');
-checkBaggage('Got some snacks and a gun for protection');
+checkBaggage('Got some snacks and a gun for protection'); */
 
 //Strings
 /* const airline = 'Tap Air Portugal';
