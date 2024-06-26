@@ -224,14 +224,35 @@ const books = [
   },
 ];
 
+//String Part 1
+/* console.log(books[1].ISBN[6]);
+console.log(books[1].ISBN[4]);
+console.log(books[1].ISBN[9]);
+console.log(books[1].ISBN[8]);
+ */
+/* const quote =
+  'A computer once beat me at chess, but it was no match for me at kick boxing';
+console.log(quote.indexOf('chess'));
+console.log(quote.slice(quote.lastIndexOf(' ') + 1)); */
+
+/* const isContributor = function (author) {
+  if (author.indexOf('Contributor') === -1) {
+    return false;
+  } else {
+    return true;
+  }
+};
+
+console.log(isContributor('Robert Sedgewick'));
+ */
 //Maps 2
-const firstBookMap = new Map(Object.entries(books[0]));
+/* const firstBookMap = new Map(Object.entries(books[0]));
 console.log(firstBookMap);
 
 for (const [key, value] of firstBookMap) {
   if (typeof value === 'number') console.log(key);
 }
-
+ */
 //Maps
 /* const bookMap = new Map();
 const Data = [
