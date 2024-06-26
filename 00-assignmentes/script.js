@@ -224,6 +224,48 @@ const books = [
   },
 ];
 
+//Strings part 2
+
+/* const normalizeAuthorName = function (nameAuthor) {
+  const nameAuthorNorm = nameAuthor.toLowerCase().trim();
+  let final = '';
+  if (nameAuthorNorm.endsWith('(contributor)')) {
+    final = nameAuthorNorm.slice(0, nameAuthorNorm.lastIndexOf(' '));
+  }
+  console.log(final[final.indexOf(' ') + 1]);
+  const capitalizaFinal =
+    final[0].toUpperCase() +
+    final.slice(1, final.indexOf(' ')) +
+    ' ' +
+    final[final.indexOf(' ') + 1].toUpperCase() +
+    final.slice(final.indexOf(' ') + 2);
+  console.log(capitalizaFinal);
+};
+normalizeAuthorName('  JuliE sussMan (Contributor)'); */
+
+// 16.2
+const newBookTitle = books[1].title.replace('Programs', 'Software');
+console.log(newBookTitle);
+// 16.3
+const logBookTheme = function (title) {
+  const titleNorm = title.toLowerCase();
+  if (titleNorm.startsWith('computer')) {
+    console.log('This book is about computers');
+  } else if (
+    titleNorm.includes('algorithms') &&
+    titleNorm.includes('structures')
+  ) {
+    console.log('This book is about algorithms and data structures');
+  } else if (
+    (titleNorm.endsWith('system') || titleNorm.endsWith('systems')) &&
+    !titleNorm.includes('operating')
+  ) {
+    console.log(
+      'This book is about some systems, but definitely not about operating systems'
+    );
+  }
+};
+
 //String Part 1
 /* console.log(books[1].ISBN[6]);
 console.log(books[1].ISBN[4]);
