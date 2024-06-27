@@ -3,6 +3,17 @@
 // Data needed for a later exercise
 const flights =
   '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
+
+/* console.log(flights.split('+')); */
+for (const flight of flights.split('+')) {
+  let [type, from, to, time] = flight.split(';');
+  const output = `${
+    type.indexOf('Delayed') === -1 ? '' : '🔴'
+  }${type.replaceAll('_', ' ')} from ${from.slice(0, 3).toUpperCase()} to ${to
+    .slice(0, 3)
+    .toUpperCase()} (${time.replace(':', 'h')})`.padStart(46);
+  console.log(output);
+}
 const weekdays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
 const openingHours = {
   [weekdays[3]]: {
@@ -51,8 +62,9 @@ const restaurant = {
     console.log(otherIngredients);
   },
 };
+
 //Challenge #4
-document.body.append(document.createElement('textarea'));
+/* document.body.append(document.createElement('textarea'));
 document.body.append(document.createElement('button'));
 const btn = document.querySelector('button');
 const text = document.querySelector('textarea');
@@ -77,7 +89,7 @@ const fixStr = function (arr) {
     right++;
   }
 };
-
+ */
 //Strings Part 3
 
 //Split and Join
