@@ -51,11 +51,37 @@ const restaurant = {
     console.log(otherIngredients);
   },
 };
+//Challenge #4
+document.body.append(document.createElement('textarea'));
+document.body.append(document.createElement('button'));
+const btn = document.querySelector('button');
+const text = document.querySelector('textarea');
+
+let words = [];
+btn.addEventListener('click', function () {
+  words = text.value.split('\n');
+  fixStr(words);
+});
+
+const fixStr = function (arr) {
+  let right = 1;
+  for (let word of arr) {
+    word = word.toLowerCase().trim();
+    let wordCamel = word.split('_');
+    wordCamel[1] = wordCamel[1].replace(
+      wordCamel[1][0],
+      wordCamel[1][0].toUpperCase()
+    );
+    word = wordCamel.join('');
+    console.log(word.padEnd(18, ' ') + '✅'.repeat(right));
+    right++;
+  }
+};
 
 //Strings Part 3
 
 //Split and Join
-console.log('a+very+nice+string'.split('+')); //Return a array
+/* console.log('a+very+nice+string'.split('+')); //Return a array
 console.log('Jonas Sanina'.split(' '));
 
 const [firstName, lastName] = 'Jonas Sanina'.split(' ');
@@ -74,15 +100,15 @@ const capitalizeName = function (name) {
 };
 
 capitalizeName('jessica ann smith davis');
-capitalizeName('tiago rosado sanina');
+capitalizeName('tiago rosado sanina'); */
 
 //Padding a String
-const message = 'Go to gate 23!';
+/* const message = 'Go to gate 23!';
 console.log(message.padStart(20, '+').padEnd(30, '+'));
-console.log('Jonas'.padStart(20, '+').padEnd(30, '+'));
+console.log('Jonas'.padStart(20, '+').padEnd(30, '+')); */
 
 //Real case of use padding
-const maskCreditCard = function (number) {
+/* const maskCreditCard = function (number) {
   const str = number + ''; //Another way to convert a Number to a String
   const last = str.slice(-4);
   return last.padStart(str.length, '*');
@@ -99,7 +125,7 @@ const planesInLine = function (n) {
   console.log(`There are ${n} planes in line ${'✈️'.repeat(n)}`);
 };
 
-planesInLine(10);
+planesInLine(10); */
 
 //Strings Part 2
 /* const airline = 'TAP Air Portugal';
