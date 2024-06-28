@@ -311,43 +311,53 @@ greetN('Danke')('Tiago');
 
 //Examples Closures
 
-let f;
-const g = function () {
-  const a = 23;
-  f = function () {
-    console.log(a * 2);
-  };
-};
+// let f;
+// const g = function () {
+//   const a = 23;
+//   f = function () {
+//     console.log(a * 2);
+//   };
+// };
 
-const h = function () {
-  const b = 777;
-  f = function () {
-    console.log(b * 2);
-  };
-};
+// const h = function () {
+//   const b = 777;
+//   f = function () {
+//     console.log(b * 2);
+//   };
+// };
 
-g();
-f();
-console.dir(f);
+// g();
+// f();
+// console.dir(f);
 
-//Re-assigning f function
-h();
-f();
-console.dir(f);
+// //Re-assigning f function
+// h();
+// f();
+// console.dir(f);
 
-// Example 2
+// // Example 2
 
-const boardPassengers = function (n, wait) {
-  const perGroup = n / 3;
+// const boardPassengers = function (n, wait) {
+//   const perGroup = n / 3;
 
-  setTimeout(function () {
-    console.log(`We are now boarding all ${n} passengers`);
-    console.log(`There are 3 groups, each with ${perGroup} passengers`);
-  }, wait * 1000);
+//   setTimeout(function () {
+//     console.log(`We are now boarding all ${n} passengers`);
+//     console.log(`There are 3 groups, each with ${perGroup} passengers`);
+//   }, wait * 1000);
 
-  console.log(`Will start boarding in ${wait} seconds`);
-};
-// this is a closure because the setTimeout executes when the boardPassengers is out of the callstack, set timeout execute after 3 secs!
+//   console.log(`Will start boarding in ${wait} seconds`);
+// };
+// // this is a closure because the setTimeout executes when the boardPassengers is out of the callstack, set timeout execute after 3 secs!
 
-const perGroup = 1000; // this is the prove why closures have prioraty over scope chain
-boardPassengers(180, 3);
+// const perGroup = 1000; // this is the prove why closures have prioraty over scope chain
+// boardPassengers(180, 3);
+
+//challenge 2
+(function () {
+  const header = document.querySelector('h1');
+  header.style.color = 'red';
+  document.body.addEventListener('click', function a() {
+    console.dir(a);
+    header.style.color = 'blue';
+  });
+})();

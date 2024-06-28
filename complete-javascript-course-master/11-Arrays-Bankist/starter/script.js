@@ -74,3 +74,43 @@ const currencies = new Map([
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
+
+//Array simple methods
+
+let arr = ['a', 'b', 'c', 'd', 'e'];
+
+//slice
+
+console.log(arr.slice(2));
+console.log(arr.slice(2, 4));
+console.log(arr.slice(-2));
+console.log(arr.slice(-1));
+console.log(arr.slice(1, -2));
+//copy array with slice
+console.log(arr.slice());
+
+//splice method
+// Funciona como o slice só que modifica o array removendo ao array os valores spliced!
+//splice is good to delete elem from the array
+console.log(arr.splice(2));
+console.log(arr);
+//ex of deleting the last elem of the array with splice
+arr.splice(-1);
+// DIFFETENCE BETWEEN IS THE SECOND ELEM OF SPLICE IS THE NUMBER OF ELEM WE WANT TO DELETE!
+
+// REVERSE
+//REVERSE MUTATE THE ARRAY! IMPORTANT!
+arr = ['a', 'b', 'c', 'd', 'e'];
+const arr2 = ['j', 'i', 'h', 'g', 'f'];
+console.log(arr2.reverse());
+console.log(arr2);
+
+// CONCAT
+
+const letters = arr.concat(arr2);
+console.log(letters);
+// this do the same thing than with the spread operator
+console.log([...arr, ...arr2]);
+
+// JOIN
+console.log(letters.join(' - '));
