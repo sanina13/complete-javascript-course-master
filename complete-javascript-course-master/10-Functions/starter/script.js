@@ -243,42 +243,111 @@ greetN('Danke')('Tiago');
 // console.log(addVAT2(100));
 
 //challenge 4
-const pollBtn = document.querySelector('.poll');
-const poll = {
-  question: 'What is your favourite programming language?',
-  options: ['0: JavaScript', '1: Python', '2: Rust', '3: C++'],
-  // This generates [0, 0, 0, 0]. More in the next section!
-  answers: new Array(4).fill(0),
-  registerNewAnswer() {
-    let answer = Number(
-      prompt(
-        'What is your favourite programming language? \n0: JavaScript \n1: Python \n2: Rust \n3: C++'
-      )
-    );
-    if (isNaN(answer) || answer < 0 || answer > 3) {
-      console.log('Try again!');
-    } else {
-      this.answers[answer]++;
-    }
-    this.displayResults('array');
-  },
+// const pollBtn = document.querySelector('.poll');
+// const poll = {
+//   question: 'What is your favourite programming language?',
+//   options: ['0: JavaScript', '1: Python', '2: Rust', '3: C++'],
+//   // This generates [0, 0, 0, 0]. More in the next section!
+//   answers: new Array(4).fill(0),
+//   registerNewAnswer() {
+//     let answer = Number(
+//       prompt(
+//         'What is your favourite programming language? \n0: JavaScript \n1: Python \n2: Rust \n3: C++'
+//       )
+//     );
+//     if (isNaN(answer) || answer < 0 || answer > 3) {
+//       console.log('Try again!');
+//     } else {
+//       this.answers[answer]++;
+//     }
+//     this.displayResults('array');
+//   },
 
-  displayResults(type) {
-    if (type === 'array') {
-      console.log(this.answers);
-    } else if (type === 'string') {
-      console.log(`Poll results are ${[...this.answers]}`);
-    }
-  },
+//   displayResults(type) {
+//     if (type === 'array') {
+//       console.log(this.answers);
+//     } else if (type === 'string') {
+//       console.log(`Poll results are ${[...this.answers]}`);
+//     }
+//   },
+// };
+
+// const data1 = [5, 2, 3];
+// const data2 = [1, 5, 3, 9, 6, 1];
+// poll.displayResults.call({ answers: data1 }, 'string');
+
+// const register = poll.registerNewAnswer.bind(poll);
+
+// pollBtn.addEventListener('click', register);
+
+// // poll.displayResults([3, 3, 5]);
+// // poll.displayResults('3, 3, 5');
+
+//Immediately Invoked Function Expressions (IIFE)
+// (function () {
+//   console.log('This will never run again');
+// })(); // we wrap the function in () to make javascript think this is just an expression, and then we call it ().
+
+// (() => console.log('This will never run again'))();//with arrow function
+
+//Closures
+
+// const secureBooking = function () {
+//   let passengerCount = 0;
+
+//   return function () {
+//     passengerCount++;
+//     console.log(`${passengerCount} passengers`);
+//   };
+// };
+
+// const booker = secureBooking();
+
+// for (let i = 0; i <= 2; i++) {
+//   booker();
+// }
+
+// console.dir(booker);
+
+//Examples Closures
+
+let f;
+const g = function () {
+  const a = 23;
+  f = function () {
+    console.log(a * 2);
+  };
 };
 
-const data1 = [5, 2, 3];
-const data2 = [1, 5, 3, 9, 6, 1];
-poll.displayResults.call({ answers: data1 }, 'string');
+const h = function () {
+  const b = 777;
+  f = function () {
+    console.log(b * 2);
+  };
+};
 
-const register = poll.registerNewAnswer.bind(poll);
+g();
+f();
+console.dir(f);
 
-pollBtn.addEventListener('click', register);
+//Re-assigning f function
+h();
+f();
+console.dir(f);
 
-// poll.displayResults([3, 3, 5]);
-// poll.displayResults('3, 3, 5');
+// Example 2
+
+const boardPassengers = function (n, wait) {
+  const perGroup = n / 3;
+
+  setTimeout(function () {
+    console.log(`We are now boarding all ${n} passengers`);
+    console.log(`There are 3 groups, each with ${perGroup} passengers`);
+  }, wait * 1000);
+
+  console.log(`Will start boarding in ${wait} seconds`);
+};
+// this is a closure because the setTimeout executes when the boardPassengers is out of the callstack, set timeout execute after 3 secs!
+
+const perGroup = 1000; // this is the prove why closures have prioraty over scope chain
+boardPassengers(180, 3);
