@@ -161,74 +161,124 @@ greetN('Danke')('Tiago');
 
 //The call and apply Methods
 
-const lufthansa = {
-  airline: 'Lufthansa',
-  iataCode: 'LH',
-  bookings: [],
-  book(flightNum, name) {
-    console.log(
-      `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
+// const lufthansa = {
+//   airline: 'Lufthansa',
+//   iataCode: 'LH',
+//   bookings: [],
+//   book(flightNum, name) {
+//     console.log(
+//       `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
+//     );
+//     this.bookings.push({ flight: `${this.iataCode}${flightNum}`, name });
+//   },
+// };
+
+// lufthansa.book(239, 'Tiago Sanina');
+// lufthansa.book(323, 'Luan Santana');
+// console.log(lufthansa);
+
+// const eurowings = {
+//   airline: 'Eurowings',
+//   iataCode: 'EW',
+//   bookings: [],
+// };
+
+// const book = lufthansa.book;
+
+// /* book(232, 'Maria Rolanda'); */
+
+// book.call(eurowings, 234, 'Maria Rola');
+// console.log(eurowings);
+
+// const swiss = {
+//   airline: 'Swiss Air Line',
+//   iataCode: 'LX',
+//   bookings: [],
+// };
+
+// book.call(swiss, 321, 'Lurdinhas Ropinhas');
+
+// //Apply method
+
+// const flightData = [583, 'George Lucas'];
+// /* book.apply(swiss, flightData); */
+
+// book.call(swiss, ...flightData);
+
+// //Bind method
+
+// const bookEW = book.bind(eurowings);
+// const bookLH = book.bind(lufthansa);
+// const bookLX = book.bind(swiss);
+
+// bookEW(23, 'Steve Moore');
+
+// //Pre sect a value, in this way, the function created by bind only need 1 arg
+// const bookEW23 = book.bind(eurowings, 23);
+// bookEW23('Fernando Couto');
+
+// //With Event Listeners
+// const buyBtn = document.querySelector('.buy');
+
+// lufthansa.planes = 300;
+// lufthansa.buyPlane = function () {
+//   // console.log(this);
+//   this.planes++;
+//   console.log(this.planes);
+// };
+// console.log(lufthansa);
+// const buyPlanesLuf = lufthansa.buyPlane.bind(lufthansa);
+
+// buyBtn.addEventListener('click', buyPlanesLuf);
+
+// //Partial application
+// // const addTax = (rate, value) => value + value * rate;
+// // console.log(addTax(0.1, 200));
+
+// // const addVAT = addTax.bind(null, 0.23); // we set the first value to null because is the THIS KEYWORD in this case in that function we dont have a this keyword we dont care about This in this case, and then we put null
+// // console.log(addVAT(40));
+
+// const addTax = rate => value => value + value * rate;
+// const addVAT2 = addTax(0.23);
+// console.log(addVAT2(100));
+
+//challenge 4
+const pollBtn = document.querySelector('.poll');
+const poll = {
+  question: 'What is your favourite programming language?',
+  options: ['0: JavaScript', '1: Python', '2: Rust', '3: C++'],
+  // This generates [0, 0, 0, 0]. More in the next section!
+  answers: new Array(4).fill(0),
+  registerNewAnswer() {
+    let answer = Number(
+      prompt(
+        'What is your favourite programming language? \n0: JavaScript \n1: Python \n2: Rust \n3: C++'
+      )
     );
-    this.bookings.push({ flight: `${this.iataCode}${flightNum}`, name });
+    if (isNaN(answer) || answer < 0 || answer > 3) {
+      console.log('Try again!');
+    } else {
+      this.answers[answer]++;
+    }
+    this.displayResults('array');
+  },
+
+  displayResults(type) {
+    if (type === 'array') {
+      console.log(this.answers);
+    } else if (type === 'string') {
+      console.log(`Poll results are ${[...this.answers]}`);
+    }
   },
 };
 
-lufthansa.book(239, 'Tiago Sanina');
-lufthansa.book(323, 'Luan Santana');
-console.log(lufthansa);
+const data1 = [5, 2, 3];
+const data2 = [1, 5, 3, 9, 6, 1];
+poll.displayResults.call({ answers: data1 }, 'string');
 
-const eurowings = {
-  airline: 'Eurowings',
-  iataCode: 'EW',
-  bookings: [],
-};
+const register = poll.registerNewAnswer.bind(poll);
 
-const book = lufthansa.book;
+pollBtn.addEventListener('click', register);
 
-/* book(232, 'Maria Rolanda'); */
-
-book.call(eurowings, 234, 'Maria Rola');
-console.log(eurowings);
-
-const swiss = {
-  airline: 'Swiss Air Line',
-  iataCode: 'LX',
-  bookings: [],
-};
-
-book.call(swiss, 321, 'Lurdinhas Ropinhas');
-
-//Apply method
-
-const flightData = [583, 'George Lucas'];
-/* book.apply(swiss, flightData); */
-
-book.call(swiss, ...flightData);
-
-//Bind method
-
-const bookEW = book.bind(eurowings);
-const bookLH = book.bind(lufthansa);
-const bookLX = book.bind(swiss);
-
-bookEW(23, 'Steve Moore');
-
-//Pre sect a value, in this way, the function created by bind only need 1 arg
-const bookEW23 = book.bind(eurowings, 23);
-bookEW23('Fernando Couto');
-
-//With Event Listeners
-const buyBtn = document.querySelector('.buy');
-
-lufthansa.planes = 300;
-lufthansa.buyPlane = function () {
-  // console.log(this);
-  this.planes++;
-  console.log(this.planes);
-};
-console.log(lufthansa);
-const buyPlanesLuf = lufthansa.buyPlane.bind(lufthansa);
-
-buyBtn.addEventListener('click', buyPlanesLuf);
-
-//Partial application
+// poll.displayResults([3, 3, 5]);
+// poll.displayResults('3, 3, 5');
