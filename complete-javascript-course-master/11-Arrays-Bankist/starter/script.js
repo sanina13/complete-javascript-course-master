@@ -82,6 +82,23 @@ const displayMovements = function (movements) {
 };
 displayMovements(account1.movements);
 
+const createUsernames = function (accs) {
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(name => name[0])
+      .join('');
+  });
+};
+createUsernames(accounts);
+
+const calcPrintBalance = function (movements) {
+  const balance = movements.reduce((acc, cur) => acc + cur, 0);
+  labelBalance.textContent = `${balance} EUR`;
+};
+calcPrintBalance(account1.movements);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -207,26 +224,46 @@ displayMovements(account1.movements);
 // checkDogs([9, 16, 6, 8, 3], [10, 5, 6, 1, 4]);
 
 //MAP METHOD
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-const euroToUsd = 1.1;
-// const movementUsd = movements.map(function (movement) {
-//   return Math.trunc(movement * euroToUsd);
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const euroToUsd = 1.1;
+// // const movementUsd = movements.map(function (movement) {
+// //   return Math.trunc(movement * euroToUsd);
+// // });
+
+// const movementUsd = movements.map(movement => Math.trunc(movement * euroToUsd));
+
+// console.log(movementUsd);
+
+// // const movementsUSDfor = [];
+// // for (const mov of movements) {
+// //   movementsUSDfor.push(Math.trunc(mov * euroToUsd));
+// // }
+// // console.log(movementsUSDfor);
+
+// const movementsDescriptions = movements.map((mov, i) => {
+//   const type = mov > 0 ? 'deposited' : 'withdrew';
+//   return `Movement ${i + 1}: You ${type} ${Math.abs(mov)}`;
 // });
 
-const movementUsd = movements.map(movement => Math.trunc(movement * euroToUsd));
+// console.log(movementsDescriptions);
 
-console.log(movementUsd);
+//FILTER METHOD
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const depositsArr = movements.filter(function (mov) {
+//   return mov > 0;
+// });
+// console.log(depositsArr);
 
-// const movementsUSDfor = [];
-// for (const mov of movements) {
-//   movementsUSDfor.push(Math.trunc(mov * euroToUsd));
-// }
-// console.log(movementsUSDfor);
+// const depositFor = [];
+// for (const mov of movements) if (mov > 0) depositFor.push(mov);
+// console.log(depositFor);
 
-movements.map((mov, i, arr) => {
-  if (mov > 0) {
-    console.log(`Movement ${i + 1}: You deposited ${mov}`);
-  } else {
-    console.log(`Movement ${i + 1}: You withdrew ${Math.abs(mov)}`);
-  }
-});
+// const withdrawals = movements.filter(mov => mov < 0);
+// console.log(withdrawals);
+
+//reduce method
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+//ACCMULATOR -> IS LIKE A SNOWBALL
+//reduce is different from the others methods, he have accumulator first, then current value, index and array
+const balanceAcc = movements.reduce((acc, cur) => acc + cur, 0); // this sec param from reduce is to put acc starting at 0
