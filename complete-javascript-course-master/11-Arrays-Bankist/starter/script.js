@@ -261,9 +261,33 @@ calcPrintBalance(account1.movements);
 // const withdrawals = movements.filter(mov => mov < 0);
 // console.log(withdrawals);
 
-//reduce method
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// //reduce method
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
-//ACCMULATOR -> IS LIKE A SNOWBALL
-//reduce is different from the others methods, he have accumulator first, then current value, index and array
-const balanceAcc = movements.reduce((acc, cur) => acc + cur, 0); // this sec param from reduce is to put acc starting at 0
+// // //ACCMULATOR -> IS LIKE A SNOWBALL
+// // //reduce is different from the others methods, he have accumulator first, then current value, index and array
+// // const balanceAcc = movements.reduce((acc, cur) => acc + cur, 0); // this sec param from reduce is to put acc starting at 0
+
+// //MAX value with reduce
+// const max = movements.reduce((acc, val) => {
+//   if (acc > val) return acc;
+//   else return val;
+// }, movements[0]);
+
+// console.log(max);
+
+// CHALLENGE #2
+const calcAverageHumanAge = function (ages) {
+  const humanAges = ages.map(age => {
+    if (age <= 2) return age * 2;
+    else return 16 + age * 4;
+  });
+  const lessHumanYears = humanAges.filter(humanAge => humanAge >= 18);
+  const avg = lessHumanYears.reduce(function (acc, age, _, arr) {
+    return acc + age / arr.length;
+  }, 0);
+  console.log(avg);
+  console.log(lessHumanYears);
+};
+
+calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
