@@ -295,21 +295,21 @@ calcPrintBalance(account1.movements);
 // console.log(max);
 
 // CHALLENGE #2 and #3
-const calcAverageHumanAge = ages => {
-  const avg = ages
-    .map(age => {
-      if (age <= 2) return age * 2;
-      else return 16 + age * 4;
-    })
-    .filter(humanAge => humanAge >= 18)
-    .reduce((acc, age, _, arr) => acc + age / arr.length, 0);
+// const calcAverageHumanAge = ages => {
+//   const avg = ages
+//     .map(age => {
+//       if (age <= 2) return age * 2;
+//       else return 16 + age * 4;
+//     })
+//     .filter(humanAge => humanAge >= 18)
+//     .reduce((acc, age, _, arr) => acc + age / arr.length, 0);
 
-  console.log(avg);
-};
+//   console.log(avg);
+// };
 
-calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
+// calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
 
-// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 // // PIPELINE
 // const depositTotalUSD = movements
@@ -317,3 +317,22 @@ calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
 //   .map(mov => mov * 1.1)
 //   .reduce((acc, mov) => acc + mov, 0);
 // console.log(depositTotalUSD);
+
+//THE FIND METHOD
+//Returns a element, in this case first elem of the array when this condition is true
+const withdraw = movements.find(mov => mov < 0);
+console.log(withdraw);
+
+console.log(accounts);
+const account = accounts.find(acc => acc.owner === 'Jessica Davis');
+console.log(account);
+
+const accFor = function () {
+  for (const acc of accounts) {
+    if (acc.owner === 'Jessica Davis') {
+      console.log(acc);
+    }
+  }
+};
+
+accFor();
