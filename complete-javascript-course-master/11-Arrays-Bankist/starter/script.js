@@ -61,6 +61,15 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+const updateUi = function (currentAccount) {
+  //Display movements
+  displayMovements(currentAccount.movements);
+  //Display balance
+  calcPrintBalance(currentAccount);
+  //Display summary
+  calcDisplaySummary(currentAccount);
+};
+
 const displayMovements = function (movements) {
   //clear the container
   containerMovements.innerHTML = '';
@@ -113,9 +122,9 @@ const createUsernames = function (accs) {
 };
 createUsernames(accounts);
 
-const calcPrintBalance = function (movements) {
-  const balance = movements.reduce((acc, cur) => acc + cur, 0);
-  labelBalance.textContent = `${balance} EUR`;
+const calcPrintBalance = function (acc) {
+  acc.balance = acc.movements.reduce((acc, cur) => acc + cur, 0);
+  labelBalance.textContent = `${acc.balance} EUR`;
 };
 
 //Event handlers
@@ -135,17 +144,71 @@ btnLogin.addEventListener('click', function (e) {
     containerApp.style.opacity = 100;
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur(); //remove the focus on the input pin after login
-    //Display movements
-    displayMovements(currentAccount.movements);
-    //Display balance
-    calcPrintBalance(currentAccount.movements);
-    //Display summary
-    calcDisplaySummary(currentAccount);
-    console.log('Log in');
+    updateUi(currentAccount);
   }
-  console.log(currentAccount);
 });
 
+btnTransfer.addEventListener('click', function (e) {
+  e.preventDefault();
+  const amount = Number(inputTransferAmount.value);
+  const receiverAcc = accounts.find(
+    acc => acc.username === inputTransferTo.value
+  );
+
+  inputTransferAmount.value = inputTransferTo.value = '';
+
+  if (
+    amount > 0 &&
+    receiverAcc &&
+    currentAccount.balance >= amount &&
+    currentAccount.username !== receiverAcc.username
+  ) {
+    //Doing the transfer
+    currentAccount.movements.push(-amount);
+    receiverAcc.movements.push(amount);
+
+    //update UI
+    updateUi(currentAccount);
+  }
+});
+
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+  const amountLoan = Number(inputLoanAmount.value);
+  const depositsCondition = currentAccount.movements.some(
+    mov => mov > amountLoan * 0.1
+  );
+  if (amountLoan > 0 && depositsCondition) {
+    //Add movement
+    currentAccount.movements.push(amountLoan);
+
+    //Update UI
+    updateUi(currentAccount);
+  }
+  inputLoanAmount.value = '';
+});
+
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault();
+  const user = inputCloseUsername.value;
+  const pin = Number(inputClosePin.value);
+  console.log(user, pin);
+  if (user === currentAccount.username && pin === currentAccount.pin) {
+    const index = accounts.findIndex(
+      acc => acc.username === currentAccount.username
+    );
+
+    //Delete Account
+    accounts.splice(index, 1);
+
+    //HIDE UI
+
+    containerApp.style.opacity = 0;
+    labelWelcome.textContent = 'Log in to get started';
+  }
+
+  inputCloseUsername.value = inputClosePin.value = '';
+});
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -338,7 +401,7 @@ btnLogin.addEventListener('click', function (e) {
 
 // calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
 
-// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 // // // PIPELINE
 // // const depositTotalUSD = movements
@@ -365,3 +428,18 @@ btnLogin.addEventListener('click', function (e) {
 // };
 
 // accFor();
+
+//Some and Every methods
+
+//EQUALATY
+// console.log(movements.includes(-130));
+
+// //Return True or false, checks a condition in the array, in this case if some value is positive
+// // CONDITION
+// const anyDeposits = movements.some(mov => mov > 0);
+// console.log(anyDeposits);
+
+//EVERY METHOD
+// É parecido com o some mas neste caso ele so retorna true se todos os elementso satisfazerem a condição colocada
+
+console.log(account4.movements.every(mov => mov > 0));
