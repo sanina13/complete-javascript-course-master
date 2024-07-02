@@ -411,7 +411,7 @@ btnSort.addEventListener('click', function (e) {
 
 // calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 // // // PIPELINE
 // // const depositTotalUSD = movements
@@ -533,10 +533,83 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 // );
 // console.log(oneHundreadDiceRolls);
 
-labelBalance.addEventListener('click', function () {
-  const valuesArr = Array.from(
-    document.querySelectorAll('.movements__value'),
-    el => Number(el.textContent.replace('€', ''))
-  );
-  console.log(valuesArr);
-});
+// labelBalance.addEventListener('click', function () {
+//   let valuesArr = Array.from(
+//     document.querySelectorAll('.movements__value'),
+//     el => Number(el.textContent.replace('€', ''))
+//   );
+//   console.log(valuesArr);
+//   //We can do the same thing with the spread operator too
+//   valuesArr = [...document.querySelectorAll('.movements__value')];
+//   console.log(valuesArr);
+// });
+// // WE CAN USE FROM TO TRANSFORM ELEM INTO ARRAYS LIKE THE NODE THAT RETURNS WHEN WE USE THE QUERYSELECTORALL
+
+//Array Methods Practice
+
+//1.
+// const bankDepositSum = accounts
+//   .flatMap(acc => acc.movements)
+//   .filter(mov => mov > 0)
+//   .reduce((acc, cur) => acc + cur, 0);
+// console.log(bankDepositSum);
+
+//2. How many deposits in the bank with atleast 1000
+// const arr = accounts.flatMap(acc => acc.movements);
+// // const manyDepositsLarge = accounts
+// //   .flatMap(acc => acc.movements)
+// //   .filter(mov => mov >= 1000).length;
+// //We can use reduce to count something in a array!
+// const manyDepositsLarge = arr.reduce((acc, mov) => {
+//   if (mov >= 1000) acc++;
+//   return acc;
+// }, 0);
+// console.log(manyDepositsLarge);
+
+//3. Reduce to a object we put a object as inital value
+// const { deposits, withdrawals } = accounts
+//   .flatMap(acc => acc.movements)
+//   .reduce(
+//     (sums, cur) => {
+//       // cur > 0 ? (sums.deposits += cur) : (sums.withdrawals += cur);
+//       sums[cur > 0 ? 'deposits' : 'withdrawals'] += cur; // another way
+//       return sums;
+//     },
+//     { deposits: 0, withdrawals: 0 }
+//   );
+// console.log(deposits, withdrawals);
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const depositTotalUSD = movements
+//   .map(mov => mov * 1.1)
+//   .reduce(
+//     (sum, mov) => {
+//       sum[mov > 0 ? 'depositsUsd' : 'withdrawsUsd'] += mov;
+//       return sum;
+//     },
+//     { depositsUsd: 0, withdrawsUsd: 0 }
+//   );
+// console.log(depositTotalUSD);
+
+//5522.00000001
+
+// 4. Convert any string to title case
+const convertTitleCase = function (title) {
+  const capitalize = str => str[0].toUpperCase() + str.slice(1);
+
+  const expections = ['a', 'an', 'and', 'the', 'but', 'or', 'on', 'in', 'with'];
+  title = title
+    .toLowerCase()
+    .split(' ')
+    .map(word => {
+      if (!expections.includes(word)) {
+        return capitalize(word);
+      } else {
+        return word;
+      }
+    })
+    .join(' ');
+  return capitalize(title);
+};
+console.log(convertTitleCase('this is a nice title'));
+console.log(convertTitleCase('this is a LONG title but not too long'));
+console.log(convertTitleCase('and here is another title with an EXAMPLE'));
