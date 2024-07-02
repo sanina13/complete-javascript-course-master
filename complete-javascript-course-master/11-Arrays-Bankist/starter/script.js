@@ -70,11 +70,14 @@ const updateUi = function (currentAccount) {
   calcDisplaySummary(currentAccount);
 };
 
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
   //clear the container
   containerMovements.innerHTML = '';
 
-  movements.forEach(function (mov, i) {
+  console.log(movements);
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements; // We use the slice to create a copy of the array and not mutating the orginal one !
+
+  movs.forEach(function (mov, i) {
     const type = mov < 0 ? 'withdrawal' : 'deposit';
 
     const html = `
@@ -208,6 +211,13 @@ btnClose.addEventListener('click', function (e) {
   }
 
   inputCloseUsername.value = inputClosePin.value = '';
+});
+
+let sorted = false;
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
 });
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -450,13 +460,83 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 // console.log(movements.every(deposit));
 // console.log(movements.filter(deposit));
 
-const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
-console.log(arr.flat()); // Joins all the elem in one single array inside of arr [1, 2, 3, 4, 5, 6, 7, 8]
+// const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+// console.log(arr.flat()); // Joins all the elem in one single array inside of arr [1, 2, 3, 4, 5, 6, 7, 8]
 
-const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
-console.log(arrDeep.flat(2)); // we can define the deep of the nested in the flat method the default is 1
+// const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
+// console.log(arrDeep.flat(2)); // we can define the deep of the nested in the flat method the default is 1
 
-const overalBalance = accounts
-  .flatMap(acc => acc.movements)
-  .reduce((acc, mov) => acc + mov, 0);
-console.log(overalBalance);
+// // FLATMAP ONLY GOES ONE LEVEL DEEP IF WE WANT MORE DEEP ARRAYS NESTED WE WILL NEED THE FLAT INSTEAD OF THE FLAT MAP, AND SET THE DEEPNESS
+// const overalBalance = accounts
+//   .flatMap(acc => acc.movements)
+//   .reduce((acc, mov) => acc + mov, 0);
+// console.log(overalBalance);
+
+//SORT ARRAYS
+//STRINGS
+// const owners = ['Jonas', 'Zack', 'Adam', 'Martha'];
+// console.log(owners.sort()); // Ordena alfabeticamente os elementos do array
+// // sort() MUTATES THE ARRAY!
+
+// //NUMBERS
+// const num = [3, 6, 2, 1, 10, 4];
+
+//return < 0, A, B (keep order)
+//return > 0, B, A (switch)
+// num.sort((a, b) => {
+//   if (a > b) {
+//     return 1;
+//   }
+//   if (b > a) {
+//     return -1;
+//   }
+// });
+
+// //Descending sort
+// num.sort((a, b) => {
+//   if (a > b) {
+//     return -1;
+//   }
+//   if (b > a) {
+//     return 1;
+//   }
+// });
+
+//Improving the sort with numbers
+// num.sort((a, b) => b - a); //Se o a > b então irá retornar um numero positivo e mudar de posição e se for o contrario retorna negativo e mantem a posição
+
+// console.log(num);
+
+//Filling Arrays_ Fill method and empty arrays
+// const x = new Array(7); // create 7 blank spaces in one array!
+// console.log(x.fill(0)); // FILL MUTATE THE ARRAY
+// //We can define with fill where we want to start to fill the array
+// //ex:
+// x.fill(1, 2); // he will fill with 1 since position 2
+// //we can define to the end param in the fill is just like slice, the last is not be included
+// //ex:
+// x.fill(2, 3, 5);
+// console.log(x);
+
+//Array.from
+
+// const arr = Array.from({ length: 7 }, () => 1); // Cria um array com 7 posições preenchidos com 1
+// console.log(arr);
+
+// const z = Array.from({ length: 7 }, (_, i) => ++i); //makes [1,2,3,4,5,6,7], com o index subindo de 1 em 1
+// console.log(z);
+
+// let diceRoll = Math.trunc(Math.random() * 7);
+// console.log(diceRoll);
+// const oneHundreadDiceRolls = Array.from({ length: 100 }, () =>
+//   Math.trunc(Math.random() * 6 + 1)
+// );
+// console.log(oneHundreadDiceRolls);
+
+labelBalance.addEventListener('click', function () {
+  const valuesArr = Array.from(
+    document.querySelectorAll('.movements__value'),
+    el => Number(el.textContent.replace('€', ''))
+  );
+  console.log(valuesArr);
+});
