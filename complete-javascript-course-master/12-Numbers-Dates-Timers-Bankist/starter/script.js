@@ -359,4 +359,4 @@ const transferFee2 = 1_500;
 
 const PI = 3.1415; // Not allowed to put in the beggining of a number or end, and when the number is decimal between the point of the decimal number
 
-console.log(Number('23_0000'));
+console.log(Number('23_0000')); //In this case numeric separtor dont work, only when we writ down numbers.
