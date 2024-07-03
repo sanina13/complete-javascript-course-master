@@ -329,4 +329,34 @@ btnSort.addEventListener('click', function (e) {
 // console.log(+(2.345).toFixed(2));
 
 //Remainder Operator
-console.log(5 % 2);
+
+// const isEven = num => num % 2 === 0;
+
+// const arrRows = Array.from(document.querySelectorAll('.movements__row'));
+
+// labelBalance.addEventListener('click', function () {
+//   [...document.querySelectorAll('.movements__row')].forEach(function (row, i) {
+//     if (i % 2 === 0) {
+//       row.style.backgroundColor = 'red';
+//     }
+//     if (i % 3 === 0) {
+//       row.style.backgroundColor = 'blue';
+//     }
+//   });
+// });
+
+//Numeric Separators
+
+// 287,460,000,000
+const diameter = 287_460_000_000; // Javascript ignores _ is just for readbilty for the programmer
+console.log(diameter);
+
+const price = 345_99;
+console.log(price);
+
+const transferFee1 = 15_00;
+const transferFee2 = 1_500;
+
+const PI = 3.1415; // Not allowed to put in the beggining of a number or end, and when the number is decimal between the point of the decimal number
+
+console.log(Number('23_0000'));
