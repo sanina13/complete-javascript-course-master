@@ -68,5 +68,7 @@ header.append(message); //last child of the header
 document
   .querySelector('.btn--close-cookie')
   .addEventListener('click', function () {
-    message.remove();
+    // message.remove(); // new way to remove
+
+    message.parentElement.removeChild(message); //old way to remove
   });
