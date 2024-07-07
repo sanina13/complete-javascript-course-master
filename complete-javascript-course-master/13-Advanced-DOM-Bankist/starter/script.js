@@ -181,12 +181,23 @@ const randomColor = () =>
 
 document.querySelector('.nav__link').addEventListener('click', function (e) {
   this.style.backgroundColor = randomColor();
+  console.log('LINK', e.target, e.currentTarget); // return where event handler was attached
+  console.log(e.currentTarget === this); // IMPORTANT!
+
+  //Stop Propagation
+  e.stopPropagation(); //NOT A GOOD IDEA STOP PROPAGATION
 });
 
 document.querySelector('.nav__links').addEventListener('click', function (e) {
   this.style.backgroundColor = randomColor();
+  console.log('CONTAINER', e.target, e.currentTarget);
 });
 
-document.querySelector('.nav').addEventListener('click', function (e) {
-  console.log('LINK');
-});
+document.querySelector('.nav').addEventListener(
+  'click',
+  function (e) {
+    this.style.backgroundColor = randomColor();
+    console.log('NAV', e.target, e.currentTarget);
+  },
+  true
+);
