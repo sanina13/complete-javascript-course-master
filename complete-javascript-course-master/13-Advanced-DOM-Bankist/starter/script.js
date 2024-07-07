@@ -155,18 +155,38 @@ btnScrollTo.addEventListener('click', function (e) {
 
 //Types of eventes and Handlers
 
-const alertH1 = function (e) {
-  alert('addEventListener: Great! You are reading the heading :D');
+// const alertH1 = function (e) {
+//   alert('addEventListener: Great! You are reading the heading :D');
 
-  // h1.removeEventListener('mouseenter', alertH1); // we need to export the function from inside the add eventlistener and then we remove the event
-};
+//   // h1.removeEventListener('mouseenter', alertH1); // we need to export the function from inside the add eventlistener and then we remove the event
+// };
 
-const h1 = document.querySelector('h1');
+// const h1 = document.querySelector('h1');
 
-h1.addEventListener('mouseenter', alertH1);
+// h1.addEventListener('mouseenter', alertH1);
 
-setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
+// setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
 
 // h1.onmouseenter = function (e) {
 //   alert('onmouseenter: Great! You are reading the heading :D');
 // };
+
+//EVENT PROPAGATION
+
+const randomInt = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1) + min);
+
+const randomColor = () =>
+  `rgb(${randomInt(0, 255)},${randomInt(0, 255)},${randomInt(0, 255)})`;
+
+document.querySelector('.nav__link').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+});
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+});
+
+document.querySelector('.nav').addEventListener('click', function (e) {
+  console.log('LINK');
+});
