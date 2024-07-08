@@ -62,7 +62,7 @@ btnScrollTo.addEventListener('click', function (e) {
 });
 
 /////////////////////////////////////
-//Page Navigation
+//Page Navigation with EVENT DELEGATION
 
 // document.querySelectorAll('.nav__link').forEach(function (el) {
 //   el.addEventListener('click', function (e) {
@@ -226,3 +226,34 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
 //   }
 // true
 // ); // SETTING TO TRUE MAKES THIS STOP BUBLE PHASE AND GOES FOR CAPTURE PHASE, what will make it happen first because the capture phase is first and then is the bubble phase  BUT IS A OLD THING TO DO, DONT USE THE CAPTURE PHASE WITH TRUE
+
+//DOM TRAVERSING
+// const h1 = document.querySelector('h1');
+
+// //Going downwards: child
+// console.log(h1.querySelectorAll('.highlight'));
+// console.log(h1.childNodes);
+// console.log(h1.children);
+// console.log((h1.firstElementChild.style.color = 'white')); // ONLY THE FIRST ELEM
+// console.log((h1.lastElementChild.style.color = 'orangered')); // ONLY THE Last ELEM
+
+// //Going upwards: parents
+// console.log(h1.parentNode);
+// console.log(h1.parentElement);
+
+// h1.closest('.header').style.background = 'var(--gradient-secondary)'; // THIS IS IMPORTANT, THIS FIND THE CLOSEST PARENT WITH THE CLASS HEADER
+// h1.closest('h1').style.background = 'var(--gradient-primary)';
+// // CLOSEST IS THE CONTRARY OF QUERY SELECTOR, QUERY SELECTOR FIND CHILDERNS OF THE ELEM AND CLOSEST FIND PARENTS
+
+// // Going sideways: siblings we can just acess the direct siblings
+// console.log(h1.previousElementSibling);
+// console.log(h1.nextElementSibling);
+
+// console.log(h1.previousSibling);
+// console.log(h1.nextSibling);
+
+// //all siblings
+// console.log(h1.parentElement.children);
+// [...h1.parentElement.children].forEach(function (el) {
+//   if (el !== h1) el.style.transform = 'scale(0.5)';
+// });
