@@ -198,6 +198,6 @@ document.querySelector('.nav').addEventListener(
   function (e) {
     this.style.backgroundColor = randomColor();
     console.log('NAV', e.target, e.currentTarget);
-  },
-  true
-);
+  }
+  // true
+); // SETTING TO TRUE MAKES THIS STOP BUBLE PHASE AND GOES FOR CAPTURE PHASE, what will make it happen first because the capture phase is first and then is the bubble phase  BUT IS A OLD THING TO DO, DONT USE THE CAPTURE PHASE WITH TRUE
