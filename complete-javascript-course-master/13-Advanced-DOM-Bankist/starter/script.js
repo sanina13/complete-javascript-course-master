@@ -180,7 +180,9 @@ observer.observe(header);
 const allSection = document.querySelectorAll('.section');
 const revealSection = function (entries, observer) {
   const [entry] = entries;
+  if (!entry.isIntersecting) return;
   entry.target.classList.remove('section--hidden');
+  observer.unobserve(entry.target); // after observe this will not trigger more the observer
 };
 const sectionObserver = new IntersectionObserver(revealSection, {
   root: null, //viweport
@@ -191,6 +193,8 @@ allSection.forEach(function (section) {
   sectionObserver.observe(section);
   section.classList.add('section--hidden');
 });
+
+//Lazy loading
 
 // // SELECTING, CREATING AND DELETING ELEMENTS
 
