@@ -135,13 +135,61 @@ nav.addEventListener('mouseover', handleHover.bind(0.5));
 
 nav.addEventListener('mouseout', handleHover.bind(1));
 
-//Sticky Navigation SCROLL EVENT IS PRETTY BAD FOR PREFORMANCE
-const initialCoords = section1.getBoundingClientRect();
-console.log(initialCoords);
-window.addEventListener('scroll', function () {
-  console.log(this.window.scrollY);
-  if (this.window.scrollY > initialCoords.top) nav.classList.add('sticky');
-  else nav.classList.remove('sticky');
+// //Sticky Navigation SCROLL EVENT IS PRETTY BAD FOR PREFORMANCE
+// const initialCoords = section1.getBoundingClientRect();
+// console.log(initialCoords);
+// window.addEventListener('scroll', function () {
+//   console.log(this.window.scrollY);
+//   if (this.window.scrollY > initialCoords.top) nav.classList.add('sticky');
+//   else nav.classList.remove('sticky');
+// });
+
+// Sticky navigation: Intersection Observer API
+// entries are the tresholds!! can be an array of tresholds
+// const obsCallback = function (entries, observer) {
+//   entries.forEach(entry => {
+//     console.log(entry);
+//   });
+// };
+// const obsOptions = {
+//   root: null,
+//   threshold: [0, 0.2],
+// };
+// const observer = new IntersectionObserver(obsCallback, obsOptions);
+// observer.observe(section1);
+
+const header = document.querySelector('.header');
+const navHeight = nav.getBoundingClientRect().height; // GET THE SIZE OF THE NAV ELEM
+const obsCallback = function (entries) {
+  const [entry] = entries;
+  if (entry.isIntersecting) {
+    nav.classList.remove('sticky');
+  } else {
+    nav.classList.add('sticky');
+  }
+};
+const obsOptions = {
+  root: null,
+  treshold: 0,
+  rootMargin: `-${navHeight}px`, // to make a margin and the navigation appears when is the size to him appears
+};
+const observer = new IntersectionObserver(obsCallback, obsOptions);
+observer.observe(header);
+
+//Revel sections
+const allSection = document.querySelectorAll('.section');
+const revealSection = function (entries, observer) {
+  const [entry] = entries;
+  entry.target.classList.remove('section--hidden');
+};
+const sectionObserver = new IntersectionObserver(revealSection, {
+  root: null, //viweport
+  treshold: 0.15,
+});
+
+allSection.forEach(function (section) {
+  sectionObserver.observe(section);
+  section.classList.add('section--hidden');
 });
 
 // // SELECTING, CREATING AND DELETING ELEMENTS
