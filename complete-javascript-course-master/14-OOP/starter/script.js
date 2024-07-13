@@ -5,12 +5,13 @@
 //constructer function always with capital letter
 const Person = function (firsName, birthYear) {
   //Instance properties
-  this.firsName = firsName;
+  this.firstName = firsName;
   this.birthYear = birthYear;
 
-  this.calcAge = function () {
-    console.log(2024 - this.birthYear);
-  };
+  //NEVER CREATE A METHOD INSIDE A CONSTRUCTOR OBJECT!
+  // this.calcAge = function () {
+  //   console.log(2024 - this.birthYear);
+  // };
 };
 
 //Jonas is a instance of Person
@@ -29,3 +30,25 @@ const jack = new Person('Jack', 1975);
 console.log(matilda, jack);
 
 console.log(jonas instanceof Person); //verify if jonas is a instance of Person
+
+//Prototypes
+console.log(Person.prototype);
+
+Person.prototype.calcAge = function () {
+  console.log(2024 - this.birthYear);
+};
+
+jonas.calcAge();
+matilda.calcAge();
+jack.calcAge();
+
+console.log(jonas.__proto__);
+console.log(jonas.__proto__ === Person.prototype);
+
+console.log(Person.prototype.isPrototypeOf(matilda));
+
+Person.prototype.species = 'Homo Sapiens';
+console.log(jonas.species, matilda.species);
+
+console.log(jonas.hasOwnProperty('firstName'));
+console.log(jonas.hasOwnProperty('species'));
