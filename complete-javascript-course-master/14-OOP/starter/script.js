@@ -79,22 +79,160 @@
 
 //Challenge 1
 
-const Car = function (make, speed) {
-  (this.make = make), (this.speed = speed);
-};
+// const Car = function (make, speed) {
+//   (this.make = make), (this.speed = speed);
+// };
 
-Car.prototype.accelerate = function () {
-  this.speed += 10;
-  console.log(`'${this.make}' going at ${this.speed} km/h`);
-};
+// Car.prototype.accelerate = function () {
+//   this.speed += 10;
+//   console.log(`'${this.make}' going at ${this.speed} km/h`);
+// };
 
-Car.prototype.brake = function () {
-  this.speed -= 5;
-  console.log(`'${this.make}' going at ${this.speed} km/h`);
-};
+// Car.prototype.brake = function () {
+//   this.speed -= 5;
+//   console.log(`'${this.make}' going at ${this.speed} km/h`);
+// };
 
-const bmw = new Car('BMW', 110);
-const ferrari = new Car('Ferrari', 150);
+// const bmw = new Car('BMW', 110);
+// const ferrari = new Car('Ferrari', 150);
+
+// bmw.accelerate();
+// bmw.brake();
+
+// ferrari.accelerate();
+// ferrari.brake();
+// ferrari.accelerate();
+
+//ES6 Classes
+//Classes in javascript are still functions
+// class expression
+// const PersonCL = class{}
+
+// declaration
+// class PersonCl {
+//   //the name needs to be constructor!
+//   constructor(fullName, birthYear) {
+//     this.fullName = fullName;
+//     this.birthYear = birthYear;
+//   }
+
+//   //the methos will be stored in the prototype
+//   calcAge() {
+//     console.log(2037 - this.birthYear);
+//   }
+
+//   greet() {
+//     console.log(`Hey ${this.fullName}`);
+//   }
+
+//   get age() {
+//     return 2037 - this.birthYear;
+//   }
+
+//   //SET A PROPRETY THAT ALREADY EXIST
+//   set fullName(name) {
+//     if (name.includes(' ')) this._fullName = name;
+//     // to define a proprety that is defined in constructor we put a _ before the name
+//     else alert(`${name} is not a full name!`);
+//   }
+
+//   // to set the _fullName name again to fullName
+//   get fullName() {
+//     return this._fullName;
+//   }
+// }
+
+// const jessica = new PersonCl('Jessica Davies', 1996);
+// console.log(jessica);
+// jessica.calcAge();
+// console.log(jessica.age);
+// console.log(jessica.__proto__ == PersonCl.prototype);
+
+// // PersonCl.prototype.greet = function () {
+// //   console.log(`Hey ${this.firstName}`);
+// // };
+// jessica.greet();
+
+// // 1. Classes are NOT hoisted
+// // 2. Class are first-class citizes
+// // 3. Classes are executed in strict mode
+
+// const walter = new PersonCl('Walter', 1965);
+
+// // GETTER AND SETTER
+// const account = {
+//   owner: 'jonas',
+//   movements: [200, 530, 120, 300],
+
+//   get latest() {
+//     return this.movements.slice(-1).pop();
+//   },
+
+//   set latest(mov) {
+//     return this.movements.push(mov);
+//   },
+// };
+
+// console.log(account.latest);
+
+// account.latest = 400;
+// console.log(account.movements);
+
+//Object.create
+// const PersonProto = {
+//   calcAge() {
+//     console.log(2037 - this.birthYear);
+//   },
+
+//   init(firstName, birthYear) {
+//     this.firstName = firstName;
+//     this.birthYear = birthYear;
+//   },
+// };
+
+// const steven = Object.create(PersonProto);
+
+// steven.init('Steven', 1998);
+// console.log(steven);
+// steven.calcAge();
+
+//Challenge #2
+
+class CarCl {
+  constructor(make, speed) {
+    (this.make = make), (this.speed = speed);
+  }
+
+  accelerate() {
+    this.speed += 10;
+    console.log(`'${this.make}' going at ${this.speed} km/h`);
+  }
+
+  brake() {
+    this.speed -= 5;
+    console.log(`'${this.make}' going at ${this.speed} km/h`);
+  }
+
+  get speedUs() {
+    return this.speed / 1.6;
+  }
+
+  set speedUs(speed) {
+    this.speed = speed * 1.6;
+  }
+}
+
+const bmw = new CarCl('BMW', 110);
+const ferrari = new CarCl('Ferrari', 150);
+const tesla = new CarCl('Tesla', 100);
+
+tesla.accelerate();
+tesla.brake();
+
+tesla.speedUs;
+tesla.speedUs = 65;
+
+console.log(tesla);
 
 bmw.accelerate();
 bmw.brake();
