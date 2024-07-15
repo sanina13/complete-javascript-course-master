@@ -198,45 +198,126 @@
 
 //Challenge #2
 
-class CarCl {
-  constructor(make, speed) {
-    (this.make = make), (this.speed = speed);
+// class CarCl {
+//   constructor(make, speed) {
+//     (this.make = make), (this.speed = speed);
+//   }
+
+//   accelerate() {
+//     this.speed += 10;
+//     console.log(`'${this.make}' going at ${this.speed} km/h`);
+//   }
+
+//   brake() {
+//     this.speed -= 5;
+//     console.log(`'${this.make}' going at ${this.speed} km/h`);
+//   }
+
+//   get speedUs() {
+//     return this.speed / 1.6;
+//   }
+
+//   set speedUs(speed) {
+//     this.speed = speed * 1.6;
+//   }
+// }
+
+// const bmw = new CarCl('BMW', 110);
+// const ferrari = new CarCl('Ferrari', 150);
+// const tesla = new CarCl('Tesla', 100);
+
+// tesla.accelerate();
+// tesla.brake();
+
+// tesla.speedUs;
+// tesla.speedUs = 65;
+
+// console.log(tesla);
+
+// bmw.accelerate();
+// bmw.brake();
+
+// ferrari.accelerate();
+// ferrari.brake();
+// ferrari.accelerate();
+
+// const Person = function (firstName, birthYear) {
+//   this.firstName = firstName;
+//   this.birthYear = birthYear;
+// };
+
+// Person.prototype.calcAge = function () {
+//   console.log(2037 - this.birthYear);
+// };
+
+// const Student = function (firstName, birthYear, course) {
+//   Person.call(this, firstName, birthYear); // set the this keyword to this and the args next
+//   this.course = course;
+// };
+
+// //Linking prototypes
+// Student.prototype = Object.create(Person.prototype);
+
+// Student.prototype.introduce = function () {
+//   console.log(`My name is ${this.firstName} and i study ${this.course}`);
+// };
+
+// const mike = new Student('Mike', 2020, 'Computer Science');
+// mike.introduce();
+// mike.calcAge();
+
+// console.log(mike.__proto__);
+// console.log(mike.__proto__.__proto__);
+
+// console.log(mike instanceof Student);
+// console.log(mike instanceof Person);
+// console.log(mike instanceof Object);
+
+// Student.prototype.constructor = Student; // To put the constructor of studente again to studente! because when we do object create the constructor change to person!
+// console.dir(Student.prototype.constructor);
+
+//Challenge #3
+
+const Car = function (make, speed) {
+  this.make = make;
+  this.speed = speed;
+};
+
+Car.prototype.accelerate = function () {
+  this.speed += 10;
+  console.log(`'${this.make}' going at ${this.speed} km/h`);
+};
+
+Car.prototype.brake = function () {
+  this.speed -= 5;
+  console.log(`'${this.make}' going at ${this.speed} km/h`);
+};
+
+const EV = function (make, speed, charge) {
+  Car.call(this, make, speed);
+  this.charge = charge;
+};
+
+EV.prototype = Object.create(Car.prototype);
+
+EV.prototype.chargeBattery = function (chargeTo) {
+  this.charge = chargeTo;
+};
+
+EV.prototype.accelerate = function () {
+  if (this.charge >= 1) {
+    this.speed += 20;
+    this.charge -= 1;
+    console.log(
+      `'${this.make}' going at ${this.speed}km/h, with a charge of ${this.charge}%`
+    );
+  } else {
+    console.log('Please Charge!🪫');
   }
+};
 
-  accelerate() {
-    this.speed += 10;
-    console.log(`'${this.make}' going at ${this.speed} km/h`);
-  }
-
-  brake() {
-    this.speed -= 5;
-    console.log(`'${this.make}' going at ${this.speed} km/h`);
-  }
-
-  get speedUs() {
-    return this.speed / 1.6;
-  }
-
-  set speedUs(speed) {
-    this.speed = speed * 1.6;
-  }
-}
-
-const bmw = new CarCl('BMW', 110);
-const ferrari = new CarCl('Ferrari', 150);
-const tesla = new CarCl('Tesla', 100);
-
+const tesla = new EV('Tesla', 100, 3);
+tesla.chargeBattery(40);
 tesla.accelerate();
-tesla.brake();
-
-tesla.speedUs;
-tesla.speedUs = 65;
-
-console.log(tesla);
-
-bmw.accelerate();
-bmw.brake();
-
-ferrari.accelerate();
-ferrari.brake();
-ferrari.accelerate();
+EV.prototype.constructor = EV;
+console.log(EV.prototype.constructor);
