@@ -323,66 +323,109 @@
 // EV.prototype.constructor = EV;
 // console.log(EV.prototype.constructor);
 
-class PersonCl {
-  //the name needs to be constructor!
-  constructor(fullName, birthYear) {
-    this.fullName = fullName;
-    this.birthYear = birthYear;
+// class PersonCl {
+//   //the name needs to be constructor!
+//   constructor(fullName, birthYear) {
+//     this.fullName = fullName;
+//     this.birthYear = birthYear;
+//   }
+
+//   //the methos will be stored in the prototype
+//   calcAge() {
+//     console.log(2037 - this.birthYear);
+//   }
+
+//   greet() {
+//     console.log(`Hey ${this.fullName}`);
+//   }
+
+//   get age() {
+//     return 2037 - this.birthYear;
+//   }
+
+//   //SET A PROPRETY THAT ALREADY EXIST
+//   set fullName(name) {
+//     if (name.includes(' ')) this._fullName = name;
+//     // to define a proprety that is defined in constructor we put a _ before the name
+//     else alert(`${name} is not a full name!`);
+//   }
+
+//   // to set the _fullName name again to fullName
+//   get fullName() {
+//     return this._fullName;
+//   }
+
+//   static hey() {
+//     console.log('Hey there!');
+//   }
+// }
+
+// class StudentCL extends PersonCl {
+//   constructor(fullName, birthYear, course) {
+//     //Always needs to happen first!
+//     super(fullName, birthYear);
+//     this.course = course;
+//   }
+
+//   introduce() {
+//     console.log(`My name is ${this.fullName} and i study ${this.course}`);
+//   }
+
+//   calcAge() {
+//     console.log(
+//       `I'm ${
+//         2037 - this.birthYear
+//       } years old, but as a student I feel more like ${
+//         2037 - this.birthYear + 10
+//       }`
+//     );
+//   }
+// }
+
+// // const martha = new StudentCL('Martha Jones', 2012);
+// const martha = new StudentCL('Martha Jones', 2012, 'Computer Science');
+// martha.introduce();
+// martha.calcAge();
+
+class Account {
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+    this.pin = pin;
+    //protected proprety
+    this._movements = [];
+    this.locale = navigator.language;
   }
 
-  //the methos will be stored in the prototype
-  calcAge() {
-    console.log(2037 - this.birthYear);
+  //Public interface
+  getMovemnts() {
+    return this._movements;
   }
 
-  greet() {
-    console.log(`Hey ${this.fullName}`);
+  deposit(val) {
+    this._movements.push(val);
   }
 
-  get age() {
-    return 2037 - this.birthYear;
+  withdraw(val) {
+    this.deposit(-val);
   }
 
-  //SET A PROPRETY THAT ALREADY EXIST
-  set fullName(name) {
-    if (name.includes(' ')) this._fullName = name;
-    // to define a proprety that is defined in constructor we put a _ before the name
-    else alert(`${name} is not a full name!`);
+  approveLoans(val) {
+    return true;
   }
 
-  // to set the _fullName name again to fullName
-  get fullName() {
-    return this._fullName;
-  }
-
-  static hey() {
-    console.log('Hey there!');
+  requestLoan(val) {
+    if (this.approveLoans(val)) {
+      this.deposit(val);
+      console.log('Loan approved');
+    }
   }
 }
 
-class StudentCL extends PersonCl {
-  constructor(fullName, birthYear, course) {
-    //Always needs to happen first!
-    super(fullName, birthYear);
-    this.course = course;
-  }
+const acc1 = new Account('Tiago', 'EUR', 1111);
 
-  introduce() {
-    console.log(`My name is ${this.fullName} and i study ${this.course}`);
-  }
+acc1.deposit(250);
+acc1.withdraw(100);
 
-  calcAge() {
-    console.log(
-      `I'm ${
-        2037 - this.birthYear
-      } years old, but as a student I feel more like ${
-        2037 - this.birthYear + 10
-      }`
-    );
-  }
-}
-
-// const martha = new StudentCL('Martha Jones', 2012);
-const martha = new StudentCL('Martha Jones', 2012, 'Computer Science');
-martha.introduce();
-martha.calcAge();
+console.log(acc1);
+console.log(acc1.getMovemnts());
