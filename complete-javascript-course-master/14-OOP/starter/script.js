@@ -387,23 +387,38 @@
 // martha.introduce();
 // martha.calcAge();
 
+// 1- Public fields
+// 2- Private fields
+//Public fields
+//Private fields
+
 class Account {
+  //1 - Public fields(instances)
+  locale = navigator.language;
+
+  //2 - private fields (instances)
+  #movements = [];
+  #pin;
+
   constructor(owner, currency, pin) {
     this.owner = owner;
     this.currency = currency;
-    this.pin = pin;
-    //protected proprety
-    this._movements = [];
-    this.locale = navigator.language;
+
+    this.#pin = pin;
+
+    // this._movements = [];
+    // this.locale = navigator.language;
   }
+
+  // 3) Public Methods
 
   //Public interface
   getMovemnts() {
-    return this._movements;
+    return this.#movements;
   }
 
   deposit(val) {
-    this._movements.push(val);
+    this.#movements.push(val);
   }
 
   withdraw(val) {
@@ -420,6 +435,11 @@ class Account {
       console.log('Loan approved');
     }
   }
+
+  // 4) Private methods
+  _approveLoans(val) {
+    return true;
+  }
 }
 
 const acc1 = new Account('Tiago', 'EUR', 1111);
@@ -429,3 +449,9 @@ acc1.withdraw(100);
 
 console.log(acc1);
 console.log(acc1.getMovemnts());
+
+// console.log(acc1.#approveLoan(100));
+
+// console.log(acc1.#movements);
+
+// Encapsulation Private Class Fields and Methods
