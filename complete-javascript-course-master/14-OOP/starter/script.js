@@ -392,66 +392,128 @@
 //Public fields
 //Private fields
 
-class Account {
-  //1 - Public fields(instances)
-  locale = navigator.language;
+// class Account {
+//   //1 - Public fields(instances)
+//   locale = navigator.language;
 
-  //2 - private fields (instances)
-  #movements = [];
-  #pin;
+//   //2 - private fields (instances)
+//   #movements = [];
+//   #pin;
 
-  constructor(owner, currency, pin) {
-    this.owner = owner;
-    this.currency = currency;
+//   constructor(owner, currency, pin) {
+//     this.owner = owner;
+//     this.currency = currency;
 
-    this.#pin = pin;
+//     this.#pin = pin;
 
-    // this._movements = [];
-    // this.locale = navigator.language;
+//     // this._movements = [];
+//     // this.locale = navigator.language;
+//   }
+
+//   // 3) Public Methods
+
+//   //Public interface
+//   getMovemnts() {
+//     return this.#movements;
+//   }
+
+//   deposit(val) {
+//     this.#movements.push(val);
+//     return this;
+//   }
+
+//   withdraw(val) {
+//     this.deposit(-val);
+//     return this;
+//   }
+
+//   _approveLoans(val) {
+//     return true;
+//   }
+
+//   requestLoan(val) {
+//     if (this._approveLoans(val)) {
+//       this.deposit(val);
+//       console.log('Loan approved');
+//       return this;
+//     }
+//   }
+
+//   // 4) Private methods
+//   _approveLoans(val) {
+//     return true;
+//   }
+// }
+
+// const acc1 = new Account('Tiago', 'EUR', 1111);
+
+// acc1.deposit(250);
+// acc1.withdraw(100);
+
+// console.log(acc1);
+// console.log(acc1.getMovemnts());
+
+// // console.log(acc1.#approveLoan(100));
+
+// // console.log(acc1.#movements);
+
+// // Encapsulation Private Class Fields and Methods
+
+// // chaining
+// acc1.deposit(300).deposit(500).withdraw(35).requestLoan(25000).withdraw(4000);
+// console.log(acc1.getMovemnts());
+
+// Challenge #4
+
+class CarCl {
+  constructor(make, speed) {
+    this.make = make;
+    this.speed = speed;
   }
 
-  // 3) Public Methods
-
-  //Public interface
-  getMovemnts() {
-    return this.#movements;
+  accelerate() {
+    this.speed += 10;
+    console.log(`'${this.make}' going at ${this.speed} km/h`);
+    return this;
   }
 
-  deposit(val) {
-    this.#movements.push(val);
-  }
-
-  withdraw(val) {
-    this.deposit(-val);
-  }
-
-  _approveLoans(val) {
-    return true;
-  }
-
-  requestLoan(val) {
-    if (this._approveLoans(val)) {
-      this.deposit(val);
-      console.log('Loan approved');
-    }
-  }
-
-  // 4) Private methods
-  _approveLoans(val) {
-    return true;
+  brake() {
+    this.speed -= 5;
+    console.log(`'${this.make}' going at ${this.speed} km/h`);
+    return this;
   }
 }
 
-const acc1 = new Account('Tiago', 'EUR', 1111);
+class EV extends CarCl {
+  //private field
+  #charge;
 
-acc1.deposit(250);
-acc1.withdraw(100);
+  constructor(make, speed, charge) {
+    super(make, speed);
+    this.#charge = charge;
+  }
 
-console.log(acc1);
-console.log(acc1.getMovemnts());
+  chargeBattery(chargeTo) {
+    this.#charge = chargeTo;
+    return this;
+  }
 
-// console.log(acc1.#approveLoan(100));
+  accelerate() {
+    if (this.#charge >= 1) {
+      this.speed += 20;
+      this.charge -= 1;
+      console.log(
+        `'${this.make}' going at ${this.speed}km/h, with a charge of ${
+          this.#charge
+        }%`
+      );
+      return this;
+    } else {
+      console.log('Please Charge!🪫');
+      return this;
+    }
+  }
+}
 
-// console.log(acc1.#movements);
-
-// Encapsulation Private Class Fields and Methods
+const tesla = new EV('Tesla', 100, 3);
+tesla.accelerate().chargeBattery(40).brake();
