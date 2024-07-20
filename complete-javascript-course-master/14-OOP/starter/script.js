@@ -465,55 +465,55 @@
 
 // Challenge #4
 
-class CarCl {
-  constructor(make, speed) {
-    this.make = make;
-    this.speed = speed;
-  }
+// class CarCl {
+//   constructor(make, speed) {
+//     this.make = make;
+//     this.speed = speed;
+//   }
 
-  accelerate() {
-    this.speed += 10;
-    console.log(`'${this.make}' going at ${this.speed} km/h`);
-    return this;
-  }
+//   accelerate() {
+//     this.speed += 10;
+//     console.log(`'${this.make}' going at ${this.speed} km/h`);
+//     return this;
+//   }
 
-  brake() {
-    this.speed -= 5;
-    console.log(`'${this.make}' going at ${this.speed} km/h`);
-    return this;
-  }
-}
+//   brake() {
+//     this.speed -= 5;
+//     console.log(`'${this.make}' going at ${this.speed} km/h`);
+//     return this;
+//   }
+// }
 
-class EV extends CarCl {
-  //private field
-  #charge;
+// class EV extends CarCl {
+//   //private field
+//   #charge;
 
-  constructor(make, speed, charge) {
-    super(make, speed);
-    this.#charge = charge;
-  }
+//   constructor(make, speed, charge) {
+//     super(make, speed);
+//     this.#charge = charge;
+//   }
 
-  chargeBattery(chargeTo) {
-    this.#charge = chargeTo;
-    return this;
-  }
+//   chargeBattery(chargeTo) {
+//     this.#charge = chargeTo;
+//     return this;
+//   }
 
-  accelerate() {
-    if (this.#charge >= 1) {
-      this.speed += 20;
-      this.charge -= 1;
-      console.log(
-        `'${this.make}' going at ${this.speed}km/h, with a charge of ${
-          this.#charge
-        }%`
-      );
-      return this;
-    } else {
-      console.log('Please Charge!🪫');
-      return this;
-    }
-  }
-}
+//   accelerate() {
+//     if (this.#charge >= 1) {
+//       this.speed += 20;
+//       this.charge -= 1;
+//       console.log(
+//         `'${this.make}' going at ${this.speed}km/h, with a charge of ${
+//           this.#charge
+//         }%`
+//       );
+//       return this;
+//     } else {
+//       console.log('Please Charge!🪫');
+//       return this;
+//     }
+//   }
+// }
 
-const tesla = new EV('Tesla', 100, 3);
-tesla.accelerate().chargeBattery(40).brake();
+// const tesla = new EV('Tesla', 100, 3);
+// tesla.accelerate().chargeBattery(40).brake();
