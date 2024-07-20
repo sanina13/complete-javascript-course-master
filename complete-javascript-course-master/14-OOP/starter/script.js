@@ -410,12 +410,12 @@ class Account {
     this.deposit(-val);
   }
 
-  approveLoans(val) {
+  _approveLoans(val) {
     return true;
   }
 
   requestLoan(val) {
-    if (this.approveLoans(val)) {
+    if (this._approveLoans(val)) {
       this.deposit(val);
       console.log('Loan approved');
     }
