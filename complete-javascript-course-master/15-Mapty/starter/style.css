@@ -218,3 +218,23 @@ a:visited {
 .cycling-popup .leaflet-popup-content-wrapper {
   border-left: 5px solid var(--color-brand--1);
 }
+
+.edit_container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  justify-items: center;
+  column-gap: 0rem;
+  margin-bottom: 2.4rem;
+}
+
+.edit_container li {
+  list-style: none;
+}
+
+.edit_icon,
+.delete_one_icon,
+.delete_all_icon {
+  font-size: 2.4rem;
+  cursor: pointer;
+}

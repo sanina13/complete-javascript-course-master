@@ -7,6 +7,9 @@ const inputDistance = document.querySelector('.form__input--distance');
 const inputDuration = document.querySelector('.form__input--duration');
 const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
+const editBtn = document.querySelector('.edit_icon');
+const deleteOneBtn = document.querySelector('.delete_one_icon');
+const deleteAllBtn = document.querySelector('.delete_all_icon');
 
 class Workout {
   date = new Date();
@@ -76,6 +79,8 @@ class App {
   #mapZoomLevel = 13;
   #mapEvent;
   #workouts = [];
+  #currentWorkout;
+  #workoutClicked = false;
 
   constructor() {
     //get user's position
@@ -88,6 +93,7 @@ class App {
     form.addEventListener('submit', this._newWorkout.bind(this));
     inputType.addEventListener('change', this._toogleElevationField);
     containerWorkouts.addEventListener('click', this._moveToPopup.bind(this));
+    editBtn.addEventListener('click', this._editWorkout.bind(this));
   }
 
   _getPosition() {
@@ -152,7 +158,7 @@ class App {
     const type = inputType.value;
     const distance = +inputDistance.value;
     const duration = +inputDuration.value;
-    const { lat, lng } = this.#mapEvent.latlng;
+    let { lat, lng } = this.#mapEvent.latlng;
     let workout;
 
     // if workout is running create a running obj
@@ -270,8 +276,11 @@ class App {
   }
 
   _moveToPopup(e) {
+    //check if a workout is clicked
+    this.#workoutClicked = true;
+
     const workoutEl = e.target.closest('.workout');
-    // console.log(workoutEl);
+    console.log(workoutEl);
 
     if (!workoutEl) return;
 
@@ -279,7 +288,7 @@ class App {
       work => work.id === workoutEl.dataset.id
     );
 
-    // console.log(workout);
+    this.#currentWorkout = workout;
 
     this.#map.setView(workout.coords, this.#mapZoomLevel, {
       animate: true,
@@ -290,6 +299,17 @@ class App {
 
     //using the public interface
     // workout.click();
+  }
+
+  //edit workout
+  _editWorkout(e) {
+    e.preventDefault();
+    if (this.#workoutClicked) {
+      console.log(this.#currentWorkout.coords);
+      form.classList.remove('hidden');
+      inputDistance.focus();
+    }
+    if (!this.#workoutClicked) alert('Nothing Selected!');
   }
 
   _setLocalStorage() {
